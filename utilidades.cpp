@@ -1,7 +1,7 @@
-#include <string.h>
-#include <stdlib.h>
-#include <iostream>
 #include "utilidades.hh"
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
 
 struct _strDArray {
     int *array;
