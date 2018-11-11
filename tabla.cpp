@@ -251,3 +251,11 @@ void agregarColEspecificas(Tabla &nueva, Columna lcTabla, char *strArray[], int 
 void agregarDatosTabla(Tabla &nueva, Columna lcTabla, char *strArray[], int cantCols) {
   agregarCeldasCol(nueva->col, lcTabla, strArray, cantCols);
 }
+
+void imprimirTablasOrd(Tabla arbolTb){
+  if(arbolTb != NULL){
+    imprimirTablasOrd(arbolTb->izq);
+    printf("%s\n", arbolTb->nombre);
+    imprimirTablasOrd(arbolTb->der);
+  }
+}

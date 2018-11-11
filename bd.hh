@@ -44,7 +44,7 @@ TipoRet join(Base &b, char *nomTabla1, char *nomTabla2, char *nomTabla3);
 
 TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales);
 
-TipoRet printTables(Base b);
+TipoRet printTables(Base bd);
 
 TipoRet printMetadata(Base b, char *nombreTabla);
 

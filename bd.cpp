@@ -268,8 +268,14 @@ TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales) {
   return NO_IMPLEMENTADA;
 }
 
-TipoRet printTables(Base b) {
-  return NO_IMPLEMENTADA;
+TipoRet printTables(Base bd) {
+  if(bd == NULL){
+    printf("No hay tablas en la base de datos\n");
+    return OK;
+  }else{
+    imprimirTablasOrd(bd->tb);
+    return OK;
+  }
 }
 
 TipoRet printMetadata(Base b, char *nombreTabla) {

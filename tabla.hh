@@ -53,4 +53,7 @@ void agregarColEspecificas(Tabla &nueva, Columna lcTabla, char *strArray[], int 
 void agregarDatosTabla(Tabla &nueva, Columna lcTabla, char *strArray[], int cantCols);
 // Agrega los datos a la tabla
 
+void imprimirTablasOrd(Tabla arbolTb);
+// Imprime todas las tablas
+
 #endif
