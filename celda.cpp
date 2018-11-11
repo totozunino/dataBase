@@ -138,10 +138,9 @@ void eliminarCeldasCol(Celda &listaCel) {
 }
 
 
-void eliminarCelda(Celda &cel, int indice){
+void eliminarCelda(Celda &cel, int indice) {
   Celda aux = cel;
   Celda anterior = NULL;
-
   if (aux != NULL) {
     for (int i = 0; i < indice; i++) {
       anterior = aux;

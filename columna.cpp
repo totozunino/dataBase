@@ -437,7 +437,7 @@ void obtenerDatos(char *datos[], Columna listaCol, int pos) {
 
 void copiarColumnas(Columna lcTabla, Columna &lcNueva) {
   for (Columna col = lcTabla; col != NULL; col = col->sig) {
-    char *nombreColumna = new char[strlen(col->nombre) + 1 ];
+    char *nombreColumna = new char[strlen(col->nombre) + 1];
     strcpy(nombreColumna, col->nombre);
     lcNueva = agregarCol(lcNueva, nombreColumna, col->esEntero);
     delete[] nombreColumna;
@@ -463,15 +463,16 @@ void copiarTodasTuplas(Columna lcTabla, Columna &lcNueva) {
   }
 }
 
-void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char **nombreCols, int cantCols) {
+void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char *strArray[], int cantCols) {
   for (int i = 0; i < cantCols; ++i) {
-    Columna col = obtenerColumna(lcTabla, nombreCols[i]);
-    for (Celda cel = col->cel; cel != NULL; cel = getCeldaSig(cel)) {
-      lcNueva->cel = agregarCelda(lcNueva->cel);
-      if (esEntero(col)) {
-        setDatoInt(lcNueva->cel, getDatoInt(cel));
+    Columna colNueva = obtenerColumna(lcNueva, strArray[i]);
+    Columna colTabla = obtenerColumna(lcTabla, strArray[i]);
+    for (Celda cel = colTabla->cel; cel != NULL; cel = getCeldaSig(cel)) {
+      colNueva->cel = agregarCelda(colNueva->cel);
+      if (esEntero(colTabla)) {
+        setDatoInt(colNueva->cel, getDatoInt(cel));
       } else {
-        setDatoStr(lcNueva->cel, getDatoStr(cel));
+        setDatoStr(colNueva->cel, getDatoStr(cel));
       }
     }
   }

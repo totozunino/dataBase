@@ -99,7 +99,7 @@ void copiarTuplasIndice(Columna lctabla, Columna &lcnueva, char operador, char *
 void copiarTodasTuplas(Columna lctabla, Columna &lcnueva);
 // Copia todas las tuplas de una tabla a la otra
 
-void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char **nombreCols, int cantCols);
+void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char *strArray[], int cantCols);
 // Agrega las celdas a la columna correspondientes
 
 #endif

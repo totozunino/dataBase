@@ -240,7 +240,7 @@ TipoRet select(Base bd, char *nombreTabla2, char *nombreCols, char *nombreTabla1
     if (!existeTabla(bd->tb, nombreTabla2)) {
       Tabla tabla = obtenerTabla(bd->tb, nombreTabla1);
       Columna lcTabla = obtenerListaCol(tabla);
-      int cantCols =  cantColumnas(nombreCols);
+      int cantCols = cantColumnas(nombreCols);
       char *strArray[cantCols];
       parsearValores(strArray, cantCols, nombreCols);
       if (existenColumnas(lcTabla, strArray, cantCols)) {

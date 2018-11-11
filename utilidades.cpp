@@ -4,9 +4,9 @@
 #include <string.h>
 
 struct _strDArray {
-  int *array;
-  int tope;
-  int tam;
+    int *array;
+    int tope;
+    int tam;
 };
 
 DArray crearDArray() {
@@ -27,9 +27,13 @@ void redimDArray(DArray &da, int tam) {
   da->array = aux;
 }
 
-int cantDArray(DArray da) { return da->tope; }
+int cantDArray(DArray da) {
+  return da->tope;
+}
 
-void setTope(DArray &da, int tope) { da->tope += tope; }
+void setTope(DArray &da, int tope) {
+  da->tope += tope;
+}
 
 void setArrayIndice(DArray &da, int indice, int pos) {
   da->array[indice] = pos;
@@ -51,7 +55,6 @@ int cantidadValores(const char *valores) {
     valor = strtok(NULL, ":");
     cont++;
   }
-  delete[] copiaValores;
   return cont;
 }
 
@@ -66,7 +69,6 @@ void parsearValores(char *strArray[], int largo, const char *valores) {
     valor = strtok(NULL, ":");
     indice++;
   }
-  delete[] copiaValores;
 }
 
 bool esNumero(const char *string) {
@@ -90,7 +92,6 @@ int parsearCondicion(char *strArray[], int largo, const char *condicion) {
     valor = strtok(NULL, "=!><*");
     indice++;
   }
-  delete[] copiaCondicion;
   return indice;
 }
 
@@ -103,7 +104,6 @@ int cantColumnas(char *nombreCols) {
     valor = strtok(NULL, ":");
     cant++;
   }
-  delete[] copiaNombreColumas;
   return cant;
 }
 
@@ -112,12 +112,10 @@ char obtenerOperador(const char *condicion) {
   char *copiaCondicion = new char[strlen(condicion) + 1];
   strcpy(copiaCondicion, condicion);
   int cont = 0;
-  while (retorno != '=' && retorno != '!' && retorno != '>' && retorno != '<' &&
-         retorno != '*') {
+  while (retorno != '=' && retorno != '!' && retorno != '>' && retorno != '<' && retorno != '*') {
     retorno = copiaCondicion[cont];
     cont++;
   }
-  delete[] copiaCondicion;
   return retorno;
 }
 
