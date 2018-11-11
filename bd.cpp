@@ -119,8 +119,9 @@ TipoRet printDataTable(Base bd, char *nombreTabla) {
     Tabla tabla = obtenerTabla(bd->tb, nombreTabla);
     printf("%s\n", nombreTabla);
     Columna listaCol = obtenerListaCol(tabla);
+    bool tipof = false;
     if (listaCol != NULL) {
-      imprimirCols(listaCol);
+      imprimirCols(listaCol, tipof);
       printf("\n");
       imprimirTuplas(listaCol);
       return OK;
@@ -269,17 +270,32 @@ TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales) {
 }
 
 TipoRet printTables(Base bd) {
-  if(bd == NULL){
+  if (bd == NULL) {
     printf("No hay tablas en la base de datos\n");
     return OK;
-  }else{
+  } else {
     imprimirTablasOrd(bd->tb);
     return OK;
   }
 }
 
-TipoRet printMetadata(Base b, char *nombreTabla) {
-  return NO_IMPLEMENTADA;
+TipoRet printMetadata(Base bd, char *nombreTabla) {
+  if (existeTabla(bd->tb, nombreTabla)) {
+    printf("%s\n", nombreTabla);
+    Tabla tabla = obtenerTabla(bd->tb, nombreTabla);
+    Columna listaCol = obtenerListaCol(tabla);
+    bool tipof = true;
+    if (listaCol != NULL) {
+      imprimirCols(listaCol, tipof);
+      printf("\n");
+      return OK;
+    } else {
+      printf("No hay columnas en %s\n", nombreTabla);
+      return OK;
+    }
+  } else {
+    return ERROR;
+  }
 }
 
 TipoRet recent(Base b) {

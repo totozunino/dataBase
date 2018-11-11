@@ -39,14 +39,17 @@ TipoRet selectWhere(Base bd, char *nombreTabla2, char *condicion, char *nombreTa
 // Crea una tabla con los datos de la tabla2 que cumplen la condicion
 
 TipoRet select(Base bd, char *nombreTabla2, char *nombreCols, char *nombreTabla1);
+// Crea una tabla con las columnas especificadas y sus datos
 
 TipoRet join(Base &b, char *nomTabla1, char *nomTabla2, char *nomTabla3);
 
 TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales);
 
 TipoRet printTables(Base bd);
+// Imprime en pantalla todas las tablas
 
-TipoRet printMetadata(Base b, char *nombreTabla);
+TipoRet printMetadata(Base bd, char *nombreTabla);
+// Imprime en pantalla todas las columnas de una tabla
 
 TipoRet recent(Base b);
 

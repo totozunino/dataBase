@@ -130,13 +130,17 @@ bool existenColumnas(Columna listaCol, char *strArray[], int cantCols) {
   return existe;
 }
 
-void imprimirCols(Columna listaCol) {
+void imprimirCols(Columna listaCol, bool tipof) {
   if (listaCol != NULL) {
     printf("%s", listaCol->nombre);
     if (listaCol->sig != NULL) {
-      printf(":");
+      if (tipof == true) {
+        printf("\n");
+      } else {
+        printf(":");
+      }
     }
-    imprimirCols(listaCol->sig);
+    imprimirCols(listaCol->sig, tipof);
   }
 }
 

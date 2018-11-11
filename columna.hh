@@ -36,7 +36,7 @@ bool checkTipos(Columna listaCol, char *valores[], int indice);
 bool existenColumnas(Columna listaCol, char *strArray[], int cantCols);
 // Retorna true si existen las columnas, false si no
 
-void imprimirCols(Columna listaCol);
+void imprimirCols(Columna listaCol, bool tipof);
 // Imprime los nombres de las columnas
 
 void imprimirTuplas(Columna listaCol);
