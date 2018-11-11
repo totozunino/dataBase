@@ -19,7 +19,7 @@
 using namespace std;
 
 int main() {
-  Base bd = crearBase();
+  //Base bd = crearBase();
   createTable(bd, "Personas");
   addCol(bd, "Personas", "CI");
   addCol(bd, "Personas", "Nombre");
