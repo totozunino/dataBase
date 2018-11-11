@@ -12,6 +12,7 @@ using namespace std;
 
 struct _strBase {
     Tabla tb;
+    char *modificadas[MAX_MODIFICADAS];
 };
 
 Base crearBase() {
@@ -99,10 +100,16 @@ TipoRet insertInto(Base bd, char *nombreTabla, char *valores) {
       if (checkTipos(listaCol, strArray, 0)) {
         if (!pkDuplicada(cel, strArray[0])) {
           insertarTuplaOrdenada(listaCol, strArray);
+          if (bd->modificadas[0] == NULL) {
+            bd->modificadas[0] = nombreTabla;
+          } else {
+            if (!checkModificadas(nombreTabla, bd->modificadas)) {
+              insertarModificadas(nombreTabla, bd->modificadas, 0);
+            }
+          }
           return OK;
-        } else {
-          return ERROR;
         }
+        return ERROR;
       } else {
         return ERROR;
       }
@@ -141,6 +148,13 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
     if (strcmp(condicion, "\"\"") == 0) {
       Columna listaCol = obtenerListaCol(tabla);
       eliminarTodasTuplas(listaCol);
+      if (bd->modificadas[0] == NULL) {
+        bd->modificadas[0] = nombreTabla;
+      } else {
+        if (!checkModificadas(nombreTabla, bd->modificadas)) {
+          insertarModificadas(nombreTabla, bd->modificadas, 0);
+        }
+      }
       return OK;
     } else {
       if (cantParseos == 2) {
@@ -148,6 +162,13 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
           char operador = obtenerOperador(condicion);
           Columna listaCol = obtenerListaCol(tabla);
           eliminarTuplasIndice(listaCol, operador, strArray);
+          if (bd->modificadas[0] == NULL) {
+            bd->modificadas[0] = nombreTabla;
+          } else {
+            if (!checkModificadas(nombreTabla, bd->modificadas)) {
+              insertarModificadas(nombreTabla, bd->modificadas, 0);
+            }
+          }
           return OK;
         } else {
           return ERROR;
@@ -172,6 +193,13 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
         Columna listaCol = obtenerListaCol(tabla);
         if (!esPk(listaCol, nombreCol)) {
           updateTuplasIndice(listaCol, operador, strArray, nombreCol, valor);
+          if (bd->modificadas[0] == NULL) {
+            bd->modificadas[0] = nombreTabla;
+          } else {
+            if (!checkModificadas(nombreTabla, bd->modificadas)) {
+              insertarModificadas(nombreTabla, bd->modificadas, 0);
+            }
+          }
           return OK;
         } else {
           Columna col = obtenerColumna(listaCol, strArray[0]);
@@ -185,6 +213,13 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
           } else {
             if (checkearValor(cel, valor, tipo)) {
               updateTuplasIndice(listaCol, operador, strArray, nombreCol, valor);
+              if (bd->modificadas[0] == NULL) {
+                bd->modificadas[0] = nombreTabla;
+              } else {
+                if (!checkModificadas(nombreTabla, bd->modificadas)) {
+                  insertarModificadas(nombreTabla, bd->modificadas, 0);
+                }
+              }
               return OK;
             } else {
               return ERROR;
@@ -298,8 +333,18 @@ TipoRet printMetadata(Base bd, char *nombreTabla) {
   }
 }
 
-TipoRet recent(Base b) {
-  return NO_IMPLEMENTADA;
+TipoRet recent(Base bd) {
+  if (bd->modificadas[0] == NULL) {
+    printf("No hay tablas modificadas\n");
+    return OK;
+  } else {
+    int cont = 0;
+    while (bd->modificadas[cont] != NULL && cont < MAX_MODIFICADAS) {
+      printf("%s\n", bd->modificadas[cont]);
+      cont++;
+    }
+    return OK;
+  }
 }
 
 Base eliminarBase(Base &bd) {

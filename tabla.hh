@@ -56,4 +56,10 @@ void agregarDatosTabla(Tabla &nueva, Columna lcTabla, char *strArray[], int cant
 void imprimirTablasOrd(Tabla arbolTb);
 // Imprime todas las tablas
 
+void insertarModificadas(char *nombreTabla, char *modificadas[], int pos);
+// Inserta las tablas modificadas
+
+bool checkModificadas(char *nombreTabla, char *modificadas[]);
+// Retorna true si ya existe la tabla modificada, false
+
 #endif

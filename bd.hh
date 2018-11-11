@@ -51,6 +51,6 @@ TipoRet printTables(Base bd);
 TipoRet printMetadata(Base bd, char *nombreTabla);
 // Imprime en pantalla todas las columnas de una tabla
 
-TipoRet recent(Base b);
+TipoRet recent(Base bd);
 
 #endif

@@ -21,11 +21,15 @@ using namespace std;
 int main() {
   Base bd = crearBase();
   createTable(bd, "Personas");
+  createTable(bd, "Pepe");
+  addCol(bd, "Pepe", "Nombre");
+  insertInto(bd, "Pepe", "hola");
   addCol(bd, "Personas", "CI");
   addCol(bd, "Personas", "Nombre");
   insertInto(bd, "Personas", "666:toto");
   insertInto(bd, "Personas", "662:pepe");
   deleteFrom(bd, "Personas", "CI*66");
+  update(bd, "Pepe", "Nombre*h", "Nombre", "gil");
   selectWhere(bd, "Personas2", "CI>664", "Personas");
   select(bd, "Putos", "Nombre:CI", "Personas");
 

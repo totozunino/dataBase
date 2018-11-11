@@ -252,10 +252,26 @@ void agregarDatosTabla(Tabla &nueva, Columna lcTabla, char *strArray[], int cant
   agregarCeldasCol(nueva->col, lcTabla, strArray, cantCols);
 }
 
-void imprimirTablasOrd(Tabla arbolTb){
-  if(arbolTb != NULL){
+void imprimirTablasOrd(Tabla arbolTb) {
+  if (arbolTb != NULL) {
     imprimirTablasOrd(arbolTb->izq);
     printf("%s\n", arbolTb->nombre);
     imprimirTablasOrd(arbolTb->der);
   }
 }
+
+void insertarModificadas(char *nombreTabla, char *modificadas[], int pos) {
+  if (pos < MAX_MODIFICADAS) {
+    if (modificadas[pos] == NULL) {
+      modificadas[pos] = nombreTabla;
+    } else {
+      insertarModificadas(modificadas[pos], modificadas, pos + 1);
+      modificadas[pos] = nombreTabla;
+    }
+  }
+}
+
+bool checkModificadas(char *nombreTabla, char *modificadas[]) {
+  return modificadas[0] == nombreTabla;
+}
+

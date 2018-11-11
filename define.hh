@@ -3,6 +3,8 @@
 
 #define MAX_COMANDO 128
 
+#define MAX_MODIFICADAS 10
+
 enum _retorno {
     OK, ERROR, NO_IMPLEMENTADA
 };
