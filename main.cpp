@@ -20,14 +20,14 @@ using namespace std;
 
 int main() {
   Base bd = crearBase();
-  //createTable(bd, "Personas");
-  //addCol(bd, "Personas", "CI");
-  //addCol(bd, "Personas", "Nombre");
-  //insertInto(bd, "Personas", "666:toto");
-  //insertInto(bd, "Personas", "662:pepe");
-  //deleteFrom(bd, "Personas", "CI*666");
-  //selectWhere(bd, "Personas2", "CI>664", "Personas");
-  //select(bd, "Putos", "Nombre:CI", "Personas");
+  createTable(bd, "Personas");
+  addCol(bd, "Personas", "CI");
+  addCol(bd, "Personas", "Nombre");
+  insertInto(bd, "Personas", "666:toto");
+  insertInto(bd, "Personas", "662:pepe");
+  deleteFrom(bd, "Personas", "CI*666");
+  selectWhere(bd, "Personas2", "CI>664", "Personas");
+  select(bd, "Putos", "Nombre:CI", "Personas");
 
 
   char *comando = new (char[MAX_COMANDO]);
