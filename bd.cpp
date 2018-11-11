@@ -103,9 +103,8 @@ TipoRet insertInto(Base bd, char *nombreTabla, char *valores) {
           if (bd->modificadas[0] == NULL) {
             bd->modificadas[0] = nombreTabla;
           } else {
-            if (!checkModificadas(nombreTabla, bd->modificadas)) {
-              insertarModificadas(nombreTabla, bd->modificadas, 0);
-            }
+            checkModificadas(nombreTabla, bd->modificadas);
+            insertarModificadas(nombreTabla, bd->modificadas, 0);
           }
           return OK;
         }
@@ -151,9 +150,8 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
       if (bd->modificadas[0] == NULL) {
         bd->modificadas[0] = nombreTabla;
       } else {
-        if (!checkModificadas(nombreTabla, bd->modificadas)) {
-          insertarModificadas(nombreTabla, bd->modificadas, 0);
-        }
+        checkModificadas(nombreTabla, bd->modificadas);
+        insertarModificadas(nombreTabla, bd->modificadas, 0);
       }
       return OK;
     } else {
@@ -165,9 +163,8 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
           if (bd->modificadas[0] == NULL) {
             bd->modificadas[0] = nombreTabla;
           } else {
-            if (!checkModificadas(nombreTabla, bd->modificadas)) {
-              insertarModificadas(nombreTabla, bd->modificadas, 0);
-            }
+            checkModificadas(nombreTabla, bd->modificadas);
+            insertarModificadas(nombreTabla, bd->modificadas, 0);
           }
           return OK;
         } else {
@@ -196,9 +193,8 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
           if (bd->modificadas[0] == NULL) {
             bd->modificadas[0] = nombreTabla;
           } else {
-            if (!checkModificadas(nombreTabla, bd->modificadas)) {
-              insertarModificadas(nombreTabla, bd->modificadas, 0);
-            }
+            checkModificadas(nombreTabla, bd->modificadas);
+            insertarModificadas(nombreTabla, bd->modificadas, 0);
           }
           return OK;
         } else {
@@ -216,9 +212,8 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
               if (bd->modificadas[0] == NULL) {
                 bd->modificadas[0] = nombreTabla;
               } else {
-                if (!checkModificadas(nombreTabla, bd->modificadas)) {
-                  insertarModificadas(nombreTabla, bd->modificadas, 0);
-                }
+                checkModificadas(nombreTabla, bd->modificadas);
+                insertarModificadas(nombreTabla, bd->modificadas, 0);
               }
               return OK;
             } else {

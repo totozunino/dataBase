@@ -271,7 +271,13 @@ void insertarModificadas(char *nombreTabla, char *modificadas[], int pos) {
   }
 }
 
-bool checkModificadas(char *nombreTabla, char *modificadas[]) {
-  return modificadas[0] == nombreTabla;
+void checkModificadas(char *nombreTabla, char *modificadas[]) {
+  int cont = 0;
+  while(cont < MAX_MODIFICADAS){
+    if(modificadas[cont] == nombreTabla){
+      modificadas[cont] = NULL;
+    }
+    cont++;
+  }
 }
 

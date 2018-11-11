@@ -59,7 +59,7 @@ void imprimirTablasOrd(Tabla arbolTb);
 void insertarModificadas(char *nombreTabla, char *modificadas[], int pos);
 // Inserta las tablas modificadas
 
-bool checkModificadas(char *nombreTabla, char *modificadas[]);
-// Retorna true si ya existe la tabla modificada, false
+void checkModificadas(char *nombreTabla, char *modificadas[]);
+// Si existe la tabla ya modificada la borra
 
 #endif
