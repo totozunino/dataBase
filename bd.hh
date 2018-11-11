@@ -41,7 +41,8 @@ TipoRet selectWhere(Base bd, char *nombreTabla2, char *condicion, char *nombreTa
 TipoRet select(Base bd, char *nombreTabla2, char *nombreCols, char *nombreTabla1);
 // Crea una tabla con las columnas especificadas y sus datos
 
-TipoRet join(Base &b, char *nomTabla1, char *nomTabla2, char *nomTabla3);
+TipoRet join(Base bd, char *nombreTabla1, char *nombreTabla2, char *nombreTabla3);
+// Crea una tabla la cual es el resultado de hacer el join entre otras 2 tablas
 
 TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales);
 
@@ -52,5 +53,6 @@ TipoRet printMetadata(Base bd, char *nombreTabla);
 // Imprime en pantalla todas las columnas de una tabla
 
 TipoRet recent(Base bd);
+// Imprime el nombre de las tablas recientemente modificadas
 
 #endif

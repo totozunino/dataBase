@@ -291,8 +291,42 @@ TipoRet select(Base bd, char *nombreTabla2, char *nombreCols, char *nombreTabla1
   }
 }
 
-TipoRet join(Base &b, char *nomTabla1, char *nomTabla2, char *nomTabla3) {
-  return NO_IMPLEMENTADA;
+TipoRet join(Base bd, char *nombreTabla1, char *nombreTabla2, char *nombreTabla3) {
+  if (existeTabla(bd->tb, nombreTabla1)) {
+    if (existeTabla(bd->tb, nombreTabla2)) {
+      if (!existeTabla(bd->tb, nombreTabla3)) {
+        Tabla tabla1 = obtenerTabla(bd->tb, nombreTabla1);
+        Tabla tabla2 = obtenerTabla(bd->tb, nombreTabla2);
+        Columna lcTabla1 = obtenerListaCol(tabla1);
+        Columna lcTabla2 = obtenerListaCol(tabla2);
+        if (lcTabla1 != NULL && lcTabla2 != NULL) {
+          if (mismaPk(lcTabla1, lcTabla2)) {
+            if (!columnasRepetidas(lcTabla1, lcTabla2)) {
+              agregarTabla(bd->tb, nombreTabla3);
+              Tabla nueva = obtenerTabla(bd->tb, nombreTabla3);
+              copiarColumnasTabla(lcTabla1, nueva);
+              Columna lcTabla2sig = obtenerColSig(lcTabla2);
+              copiarColumnasTabla(lcTabla2sig, nueva);
+              Columna lcNueva = obtenerListaCol(nueva);
+              copiarDatosColumnas(lcNueva, lcTabla1, lcTabla2);
+            } else {
+              return ERROR;
+            }
+          } else {
+            return ERROR;
+          }
+        } else {
+          return ERROR;
+        }
+      } else {
+        return ERROR;
+      }
+    } else {
+      return ERROR;
+    }
+  } else {
+    return ERROR;
+  }
 }
 
 TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales) {

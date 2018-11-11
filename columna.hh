@@ -102,4 +102,18 @@ void copiarTodasTuplas(Columna lctabla, Columna &lcnueva);
 void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char *strArray[], int cantCols);
 // Agrega las celdas a la columna correspondientes
 
+bool mismaPk(Columna lcTabla1, Columna lcTabla2);
+// Retorna true si las columnas tienen las mismas pks, false si no
+
+bool columnasRepetidas(Columna lcTabla1, Columna lcTabla2);
+// Retorna true si hay columnas repetidas, flase si no
+
+Columna obtenerColSig(Columna lcTabla2);
+// Retorna la lista de columna siguiente
+
+void copiarDatosColumnas(Columna &lcNueva, Columna lcTabla1, Columna lcTabla2sig);
+// Copia los datos a las columnas
+
+void agregarDatosIndice(Columna &lcNueva, Columna lcTabla1, int pos1, Columna lcTabla2, int pos2);
+
 #endif

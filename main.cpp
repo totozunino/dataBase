@@ -25,8 +25,9 @@ int main() {
   createTable(bd, "Hola");
   addCol(bd, "Hola", "Nombre");
   addCol(bd, "Pepe", "Nombre");
-  insertInto(bd, "Pepe", "hola");
-  insertInto(bd, "Hola", "xd");
+  addCol(bd, "Pepe", "Edad");
+  insertInto(bd, "Pepe", "Roberto:16");
+  insertInto(bd, "Hola", "Roberto");
   addCol(bd, "Personas", "CI");
   addCol(bd, "Personas", "Nombre");
   insertInto(bd, "Personas", "666:toto");
@@ -36,6 +37,7 @@ int main() {
   selectWhere(bd, "Personas2", "CI>664", "Personas");
   insertInto(bd, "Hola", "ghhola");
   select(bd, "Putos", "Nombre:CI", "Personas");
+  join(bd, "Pepe", "Hola", "PepeHola");
 
 
   char *comando = new (char[MAX_COMANDO]);

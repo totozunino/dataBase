@@ -481,3 +481,80 @@ void agregarCeldasCol(Columna &lcNueva, Columna lcTabla, char *strArray[], int c
     }
   }
 }
+
+bool mismaPk(Columna lcTabla1, Columna lcTabla2) {
+  return strcmp(lcTabla1->nombre, lcTabla2->nombre) == 0;
+}
+
+bool columnasRepetidas(Columna lcTabla1, Columna lcTabla2) {
+  bool repetidas = false;
+  Columna col2 = lcTabla2->sig;
+  if (col2 != NULL) {
+    for (Columna col1 = lcTabla1->sig; col1 != NULL; col1 = col1->sig) {
+      if (strcmp(col1->nombre, col2->nombre) == 0) {
+        repetidas = true;
+        col1 = NULL;
+      } else {
+        if (col2->sig != NULL) {
+          col2 = col2->sig;
+        } else {
+          col1 = NULL;
+        }
+      }
+    }
+  }
+  return repetidas;
+}
+
+Columna obtenerColSig(Columna lcTabla2) {
+  return lcTabla2->sig;
+}
+
+void copiarDatosColumnas(Columna &lcNueva, Columna lcTabla1, Columna lcTabla2) {
+  int pos1 = 0;
+  for (Celda cel1 = lcTabla1->cel; cel1 != NULL; cel1 = getCeldaSig(cel1)) {
+    int pos2 = 0;
+    for (Celda cel2 = lcTabla2->cel; cel2 != NULL; cel2 = getCeldaSig(cel2)) {
+      if (esEntero(lcTabla1)) {
+        if (getDatoInt(cel1) == getDatoInt(cel2)) {
+          agregarDatosIndice(lcNueva, lcTabla1, pos1, lcTabla2, pos2);
+        }
+      } else {
+        if (strcmp(getDatoStr(cel1), getDatoStr(cel2)) == 0) {
+          agregarDatosIndice(lcNueva, lcTabla1, pos1, lcTabla2, pos2);
+        }
+      }
+      pos2++;
+    }
+    pos1++;
+  }
+}
+
+void agregarDatosIndice(Columna &lcNueva, Columna lcTabla1, int pos1, Columna lcTabla2, int pos2) {
+  for (Columna col1 = lcTabla1; col1 != NULL; col1 = col1->sig) {
+    Columna nueva = obtenerColumna(lcNueva, col1->nombre);
+    Celda cel = col1->cel;
+    for (int i = 0; i < pos1; i++) {
+      cel = getCeldaSig(cel);
+    }
+    nueva->cel = agregarCelda(nueva->cel);
+    if (esEntero(nueva)) {
+      setDatoInt(nueva->cel, getDatoInt(cel));
+    } else {
+      setDatoStr(nueva->cel, getDatoStr(cel));
+    }
+  }
+  for (Columna col2 = lcTabla2->sig; col2 != NULL; col2 = col2->sig) {
+    Columna nueva = obtenerColumna(lcNueva, col2->nombre);
+    Celda cel = col2->cel;
+    for (int i = 0; i < pos2; i++) {
+      cel = getCeldaSig(cel);
+    }
+    nueva->cel = agregarCelda(nueva->cel);
+    if (esEntero(nueva)) {
+      setDatoInt(nueva->cel, getDatoInt(cel));
+    } else {
+      setDatoStr(nueva->cel, getDatoStr(cel));
+    }
+  }
+}
