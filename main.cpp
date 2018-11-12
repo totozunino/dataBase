@@ -21,23 +21,18 @@ using namespace std;
 int main() {
   Base bd = crearBase();
   createTable(bd, "Personas");
-  createTable(bd, "Pepe");
-  createTable(bd, "Hola");
-  addCol(bd, "Hola", "Nombre");
-  addCol(bd, "Pepe", "Nombre");
-  addCol(bd, "Pepe", "Edad");
-  insertInto(bd, "Pepe", "Roberto:16");
-  insertInto(bd, "Hola", "Roberto");
+  createTable(bd, "Trabajan");
+  addCol(bd, "Trabajan", "CI");
+  addCol(bd, "Trabajan", "Ocupacion");
+  insertInto(bd, "Trabajan", "666:Dentista");
+  insertInto(bd, "Trabajan", "444:Cirujano");
   addCol(bd, "Personas", "CI");
   addCol(bd, "Personas", "Nombre");
   insertInto(bd, "Personas", "666:toto");
   insertInto(bd, "Personas", "662:pepe");
-  deleteFrom(bd, "Personas", "CI*66");
-  update(bd, "Pepe", "Nombre*h", "Nombre", "gil");
   selectWhere(bd, "Personas2", "CI>664", "Personas");
-  insertInto(bd, "Hola", "ghhola");
   select(bd, "Putos", "Nombre:CI", "Personas");
-  join(bd, "Pepe", "Hola", "PepeHola");
+  join(bd, "Personas", "Trabajan", "Trabajadores");
 
 
   char *comando = new (char[MAX_COMANDO]);

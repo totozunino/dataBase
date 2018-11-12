@@ -497,8 +497,6 @@ bool columnasRepetidas(Columna lcTabla1, Columna lcTabla2) {
       } else {
         if (col2->sig != NULL) {
           col2 = col2->sig;
-        } else {
-          col1 = NULL;
         }
       }
     }

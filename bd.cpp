@@ -309,6 +309,7 @@ TipoRet join(Base bd, char *nombreTabla1, char *nombreTabla2, char *nombreTabla3
               copiarColumnasTabla(lcTabla2sig, nueva);
               Columna lcNueva = obtenerListaCol(nueva);
               copiarDatosColumnas(lcNueva, lcTabla1, lcTabla2);
+              return OK;
             } else {
               return ERROR;
             }
