@@ -44,7 +44,8 @@ TipoRet select(Base bd, char *nombreTabla2, char *nombreCols, char *nombreTabla1
 TipoRet join(Base bd, char *nombreTabla1, char *nombreTabla2, char *nombreTabla3);
 // Crea una tabla la cual es el resultado de hacer el join entre otras 2 tablas
 
-TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales);
+TipoRet equalTables(Base bd, char *nombreTabla1, char *nombreTabla2, bool &iguales);
+// Se fija si dos tablas son iguales
 
 TipoRet printTables(Base bd);
 // Imprime en pantalla todas las tablas

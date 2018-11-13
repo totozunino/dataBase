@@ -115,5 +115,12 @@ void copiarDatosColumnas(Columna &lcNueva, Columna lcTabla1, Columna lcTabla2sig
 // Copia los datos a las columnas
 
 void agregarDatosIndice(Columna &lcNueva, Columna lcTabla1, int pos1, Columna lcTabla2, int pos2);
+// Agrega los datos de dichas posiciones
+
+bool mismasColumnas(Columna lcTabla1, Columna lcTabla2);
+// Retorna true si tienen las mismas columnas, false si no
+
+bool mismosDatos(Columna lcTabla1, Columna lcTabla2);
+// Retorna true si tienen los mismos datos, false si no
 
 #endif

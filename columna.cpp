@@ -488,17 +488,14 @@ bool mismaPk(Columna lcTabla1, Columna lcTabla2) {
 
 bool columnasRepetidas(Columna lcTabla1, Columna lcTabla2) {
   bool repetidas = false;
+  Columna col1 = lcTabla1->sig;
   Columna col2 = lcTabla2->sig;
-  if (col2 != NULL) {
-    for (Columna col1 = lcTabla1->sig; col1 != NULL; col1 = col1->sig) {
-      if (strcmp(col1->nombre, col2->nombre) == 0) {
-        repetidas = true;
-        col1 = NULL;
-      } else {
-        if (col2->sig != NULL) {
-          col2 = col2->sig;
-        }
-      }
+  while (!repetidas && col1 != NULL && col2 != NULL) {
+    if (strcmp(col1->nombre, col2->nombre) == 0) {
+      repetidas = true;
+    } else {
+      col1 = col1->sig;
+      col2 = col2->sig;
     }
   }
   return repetidas;
@@ -555,4 +552,69 @@ void agregarDatosIndice(Columna &lcNueva, Columna lcTabla1, int pos1, Columna lc
       setDatoStr(nueva->cel, getDatoStr(cel));
     }
   }
+}
+
+bool mismasColumnas(Columna lcTabla1, Columna lcTabla2) {
+  if (lcTabla1 == NULL && lcTabla2 == NULL) {
+    return true;
+  } else if (lcTabla1 == NULL || lcTabla2 == NULL) {
+    return false;
+  } else {
+    if (strcmp(lcTabla1->nombre, lcTabla2->nombre) == 0) {
+      return mismasColumnas(lcTabla1->sig, lcTabla2->sig);
+    } else {
+      return false;
+    }
+  }
+}
+
+bool mismosDatos(Columna lcTabla1, Columna lcTabla2) {
+  bool iguales = true;
+  Columna col1 = lcTabla1;
+  Columna col2 = lcTabla2;
+  Celda cel1 = col1->cel;
+  Celda cel2 = col2->cel;
+  while (iguales && col1 != NULL && col2 != NULL) {
+    if (esEntero(col1) && esEntero(col2)) {
+      if (getDatoInt(cel1) == getDatoInt(cel2)) {
+        if (getCeldaSig(cel1) == NULL && getCeldaSig(cel2) == NULL) {
+          col1 = col1->sig;
+          col2 = col2->sig;
+          if (col1 != NULL && col2 != NULL) {
+            cel1 = col1->cel;
+            cel2 = col2->cel;
+          }
+        } else if (getCeldaSig(cel1) != NULL && getCeldaSig(cel2) != NULL) {
+          cel1 = getCeldaSig(cel1);
+          cel2 = getCeldaSig(cel2);
+        } else {
+          iguales = false;
+        }
+      } else {
+        iguales = false;
+      }
+    } else if (!esEntero(col1) && !esEntero(col2)) {
+      if (strcmp((getDatoStr(cel1)), getDatoStr(cel2)) == 0) {
+        if (getCeldaSig(cel1) == NULL && getCeldaSig(cel2) == NULL) {
+          col1 = col1->sig;
+          col2 = col2->sig;
+          if (col1 != NULL && col2 != NULL) {
+            cel1 = col1->cel;
+            cel2 = col2->cel;
+          }
+        } else if (getCeldaSig(cel1) != NULL && getCeldaSig(cel2) != NULL) {
+          cel1 = getCeldaSig(cel1);
+          cel2 = getCeldaSig(cel2);
+        } else {
+          iguales = false;
+        }
+      } else {
+        iguales = false;
+      }
+
+    } else {
+
+    }
+  }
+  return iguales;
 }

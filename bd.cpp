@@ -330,8 +330,31 @@ TipoRet join(Base bd, char *nombreTabla1, char *nombreTabla2, char *nombreTabla3
   }
 }
 
-TipoRet equalTables(Base b, char *nomTabla1, char *nomTabla2, bool &iguales) {
-  return NO_IMPLEMENTADA;
+TipoRet equalTables(Base bd, char *nombreTabla1, char *nombreTabla2, bool &iguales) {
+  if (existeTabla(bd->tb, nombreTabla1)) {
+    if (existeTabla(bd->tb, nombreTabla2)) {
+      Tabla tabla1 = obtenerTabla(bd->tb, nombreTabla1);
+      Tabla tabla2 = obtenerTabla(bd->tb, nombreTabla2);
+      Columna lcTabla1 = obtenerListaCol(tabla1);
+      Columna lcTabla2 = obtenerListaCol(tabla2);
+      if (mismasColumnas(lcTabla1, lcTabla2)) {
+        if (mismosDatos(lcTabla1, lcTabla2)) {
+          iguales = true;
+          return OK;
+        } else {
+          iguales = false;
+          return OK;
+        }
+      } else {
+        iguales = false;
+        return OK;
+      }
+    } else {
+      return ERROR;
+    }
+  } else {
+    return ERROR;
+  }
 }
 
 TipoRet printTables(Base bd) {
