@@ -78,7 +78,7 @@ void updateTupla(Columna listaCol, int pos, char *nombreCol, char *valor);
 void updateTuplasIndice(Columna listaCol, char operador, char *strArray[], char *nombreCol, char *valor);
 // Modifica la tupla indicada
 
-int checkearDatos(Celda listaCel, char *valor, bool tipo);
+int checkearDatos(Celda listaCel, char *valor, char operador, bool tipo);
 // Checkea cuantos datos iguales a valor hay en la lista de celdas
 
 bool checkearValor(Celda listaCel, char *valor, bool tipo);

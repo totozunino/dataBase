@@ -107,17 +107,15 @@ bool existeListaCel(Columna listaCol) {
 }
 
 bool checkTipos(Columna listaCol, char *valores[], int indice) {
-  if (listaCol != NULL) {
-    if (esEntero(listaCol) && esNumero(valores[indice])) {
-      return checkTipos(listaCol->sig, valores, indice + 1);
-    } else if (!esEntero(listaCol) && !esNumero(valores[indice])) {
-      return checkTipos(listaCol->sig, valores, indice + 1);
-    } else {
-      return false;
+  bool validos = true;
+  while (validos && listaCol != NULL) {
+    if (esEntero(listaCol)) {
+      validos = esNumero(valores[indice]);
     }
-  } else {
-    return true;
+    indice++;
+    listaCol = listaCol->sig;
   }
+  return validos;
 }
 
 bool existenColumnas(Columna listaCol, char *strArray[], int cantCols) {
@@ -383,20 +381,79 @@ void updateTupla(Columna listaCol, int pos, char *nombreCol, char *valor) {
   }
 }
 
-int checkearDatos(Celda listaCel, char *valor, bool tipo) {
+int checkearDatos(Celda listaCel, char *valor, char operador, bool tipo) {
   if (listaCel != NULL) {
-    if (tipo) {
-      if (getDatoInt(listaCel) == atoi(valor)) {
-        return 1 + checkearDatos(getCeldaSig(listaCel), valor, tipo);
-      } else {
-        return 0 + checkearDatos(getCeldaSig(listaCel), valor, tipo);
-      }
-    } else {
-      if (strcmp(getDatoStr(listaCel), valor) == 0) {
-        return 1 + checkearDatos(getCeldaSig(listaCel), valor, tipo);
-      } else {
-        return 0 + checkearDatos(getCeldaSig(listaCel), valor, tipo);
-      }
+    switch (operador) {
+      case '=':
+        if (tipo) {
+          if (getDatoInt(listaCel) == atoi(valor)) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        } else {
+          if (strcmp(getDatoStr(listaCel), valor) == 0) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        }
+      case '!':
+        if (tipo) {
+          if (getDatoInt(listaCel) != atoi(valor)) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        } else {
+          if (strcmp(getDatoStr(listaCel), valor) != 0) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        }
+      case '>':
+        if (tipo) {
+          if (getDatoInt(listaCel) > atoi(valor)) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        } else {
+          if (strcmp(getDatoStr(listaCel), valor) > 0) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        }
+      case '<':
+        if (tipo) {
+          if (getDatoInt(listaCel) < atoi(valor)) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        } else {
+          if (strcmp(getDatoStr(listaCel), valor) < 0) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        }
+      case '*':
+        if (tipo) {
+          if (compararPrefijoInt(getDatoInt(listaCel), atoi(valor))) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        } else {
+          if (compararPrefijoStr(getDatoStr(listaCel), valor)) {
+            return 1 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          } else {
+            return 0 + checkearDatos(getCeldaSig(listaCel), valor, operador, tipo);
+          }
+        }
     }
   } else {
     return 0;
@@ -431,6 +488,13 @@ void obtenerDatos(char *datos[], Columna listaCol, int pos) {
       cel = getCeldaSig(col->cel);
     }
     if (esEntero(col)) {
+      int dato = getDatoInt(cel);
+      int cant = 0;
+      while (dato != 0) {
+        dato = dato / 10;
+        cant++;
+      }
+      datos[indice] = new char[cant + 1];
       sprintf(datos[indice], "%d", getDatoInt(cel));
     } else {
       datos[indice] = getDatoStr(cel);

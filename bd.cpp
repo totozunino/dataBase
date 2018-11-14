@@ -204,7 +204,7 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
           if (esEntero(col)) {
             tipo = true;
           }
-          if (checkearDatos(cel, strArray[1], tipo) > 1) {
+          if (checkearDatos(cel, strArray[1], operador, tipo) > 1) {
             return ERROR;
           } else {
             if (checkearValor(cel, valor, tipo)) {
@@ -238,7 +238,7 @@ TipoRet selectWhere(Base bd, char *nombreTabla2, char *condicion, char *nombreTa
     if (!existeTabla(bd->tb, nombreTabla2)) {
       Tabla tabla = obtenerTabla(bd->tb, nombreTabla);
       Columna lctabla = obtenerListaCol(tabla);
-      if (strcmp(condicion, "") == 0) {
+      if (strcmp(condicion, "\"\"") == 0) {
         agregarTabla(bd->tb, nombreTabla2);
         Tabla nueva = obtenerTabla(bd->tb, nombreTabla2);
         copiarColumnasTabla(lctabla, nueva);
