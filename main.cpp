@@ -35,7 +35,6 @@ int main() {
   join(bd, "Personas", "Trabajan", "Trabajadores");
 
 
-
   char *comando = new (char[MAX_COMANDO]);
   char *pch, *pch1, *pch2, *pch3;
   TipoRet ret;
@@ -205,10 +204,12 @@ int main() {
         if (pch1 != NULL) {
           ret = equalTables(bd, pch, pch1, iguales);
           ejecutado = true;
-          if (iguales)
-            cout << " - Las tablas son iguales.\n";
-          else
-            cout << " - Las tablas son distintas.\n";
+          if (ret == OK) {
+            if (iguales)
+              cout << " - Las tablas son iguales.\n";
+            else
+              cout << " - Las tablas son distintas.\n";
+          }
         } else
           cout << " - ERROR: Faltan Parametros.\n";
       } else
