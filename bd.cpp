@@ -350,6 +350,8 @@ TipoRet equalTables(Base bd, char *nombreTabla1, char *nombreTabla2, bool &igual
           iguales = false;
           return OK;
         }
+      } else {
+        return ERROR;
       }
     } else {
       return ERROR;
