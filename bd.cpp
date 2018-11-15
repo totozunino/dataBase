@@ -337,17 +337,19 @@ TipoRet equalTables(Base bd, char *nombreTabla1, char *nombreTabla2, bool &igual
       Tabla tabla2 = obtenerTabla(bd->tb, nombreTabla2);
       Columna lcTabla1 = obtenerListaCol(tabla1);
       Columna lcTabla2 = obtenerListaCol(tabla2);
-      if (mismasColumnas(lcTabla1, lcTabla2)) {
-        if (mismosDatos(lcTabla1, lcTabla2)) {
-          iguales = true;
-          return OK;
+      if (mismosTipos(lcTabla1, lcTabla2)) {
+        if (mismasColumnas(lcTabla1, lcTabla2)) {
+          if (mismosDatos(lcTabla1, lcTabla2)) {
+            iguales = true;
+            return OK;
+          } else {
+            iguales = false;
+            return OK;
+          }
         } else {
           iguales = false;
           return OK;
         }
-      } else {
-        iguales = false;
-        return OK;
       }
     } else {
       return ERROR;

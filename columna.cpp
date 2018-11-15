@@ -682,3 +682,26 @@ bool mismosDatos(Columna lcTabla1, Columna lcTabla2) {
   }
   return iguales;
 }
+
+bool mismosTipos(Columna lcTabla1, Columna lcTabla2) {
+  bool mismos = true;
+
+  while (mismos && lcTabla1 != NULL && lcTabla2 != NULL) {
+    if (esEntero(lcTabla1)) {
+      if (esEntero(lcTabla2)) {
+        lcTabla1 = lcTabla1->sig;
+        lcTabla2 = lcTabla2->sig;
+      } else {
+        mismos = false;
+      }
+    } else {
+      if (esEntero(lcTabla2)) {
+        mismos = false;
+      } else {
+        lcTabla1 = lcTabla1->sig;
+        lcTabla2 = lcTabla2->sig;
+      }
+    }
+  }
+  return mismos;
+}

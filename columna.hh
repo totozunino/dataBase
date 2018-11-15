@@ -123,4 +123,7 @@ bool mismasColumnas(Columna lcTabla1, Columna lcTabla2);
 bool mismosDatos(Columna lcTabla1, Columna lcTabla2);
 // Retorna true si tienen los mismos datos, false si no
 
+bool mismosTipos(Columna lcTabla1, Columna lcTabla2);
+// Retorna true si las columnas tienen el mismo tipo de dato, false si no
+
 #endif
