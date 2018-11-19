@@ -101,7 +101,8 @@ TipoRet insertInto(Base bd, char *nombreTabla, char *valores) {
         if (!pkDuplicada(cel, strArray[0])) {
           insertarTuplaOrdenada(listaCol, strArray);
           if (bd->modificadas[0] == NULL) {
-            bd->modificadas[0] = nombreTabla;
+            bd->modificadas[0] = new char [strlen(nombreTabla) + 1];
+            strcpy(bd->modificadas[0], nombreTabla);
           } else {
             checkModificadas(nombreTabla, bd->modificadas);
             insertarModificadas(nombreTabla, bd->modificadas, 0);
@@ -148,7 +149,8 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
       Columna listaCol = obtenerListaCol(tabla);
       eliminarTodasTuplas(listaCol);
       if (bd->modificadas[0] == NULL) {
-        bd->modificadas[0] = nombreTabla;
+        bd->modificadas[0] = new char [strlen(nombreTabla) + 1];
+        strcpy(bd->modificadas[0], nombreTabla);
       } else {
         checkModificadas(nombreTabla, bd->modificadas);
         insertarModificadas(nombreTabla, bd->modificadas, 0);
@@ -161,7 +163,8 @@ TipoRet deleteFrom(Base bd, char *nombreTabla, char *condicion) {
           Columna listaCol = obtenerListaCol(tabla);
           eliminarTuplasIndice(listaCol, operador, strArray);
           if (bd->modificadas[0] == NULL) {
-            bd->modificadas[0] = nombreTabla;
+            bd->modificadas[0] = new char [strlen(nombreTabla) + 1];
+            strcpy(bd->modificadas[0], nombreTabla);
           } else {
             checkModificadas(nombreTabla, bd->modificadas);
             insertarModificadas(nombreTabla, bd->modificadas, 0);
@@ -191,7 +194,8 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
         if (!esPk(listaCol, nombreCol)) {
           updateTuplasIndice(listaCol, operador, strArray, nombreCol, valor);
           if (bd->modificadas[0] == NULL) {
-            bd->modificadas[0] = nombreTabla;
+            bd->modificadas[0] = new char [strlen(nombreTabla) + 1];
+            strcpy(bd->modificadas[0], nombreTabla);
           } else {
             checkModificadas(nombreTabla, bd->modificadas);
             insertarModificadas(nombreTabla, bd->modificadas, 0);
@@ -210,7 +214,8 @@ TipoRet update(Base bd, char *nombreTabla, char *condicion, char *nombreCol, cha
             if (checkearValor(cel, valor, tipo)) {
               updateTuplasIndice(listaCol, operador, strArray, nombreCol, valor);
               if (bd->modificadas[0] == NULL) {
-                bd->modificadas[0] = nombreTabla;
+                bd->modificadas[0] = new char [strlen(nombreTabla) + 1];
+                strcpy(bd->modificadas[0], nombreTabla);
               } else {
                 checkModificadas(nombreTabla, bd->modificadas);
                 insertarModificadas(nombreTabla, bd->modificadas, 0);

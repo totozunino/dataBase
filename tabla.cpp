@@ -262,20 +262,26 @@ void imprimirTablasOrd(Tabla arbolTb) {
 
 void insertarModificadas(char *nombreTabla, char *modificadas[], int pos) {
   if (pos < MAX_MODIFICADAS) {
-    if (modificadas[pos] == NULL) {
-      modificadas[pos] = nombreTabla;
-    } else {
+    if (modificadas[pos] != NULL) {
       insertarModificadas(modificadas[pos], modificadas, pos + 1);
-      modificadas[pos] = nombreTabla;
+      if (nombreTabla != NULL) {
+        modificadas[pos] = new char[strlen(nombreTabla) + 1];
+        strcpy(modificadas[pos], nombreTabla);
+      }
+    }else{
+      modificadas[pos] = new char[strlen(nombreTabla) + 1];
+      strcpy(modificadas[pos], nombreTabla);
     }
   }
 }
 
 void checkModificadas(char *nombreTabla, char *modificadas[]) {
   int cont = 0;
-  while(cont < MAX_MODIFICADAS){
-    if(modificadas[cont] == nombreTabla){
-      modificadas[cont] = NULL;
+  while (cont < MAX_MODIFICADAS) {
+    if (modificadas[cont] != NULL) {
+      if (strcmp(modificadas[cont], nombreTabla) == 0) {
+        modificadas[cont] = NULL;
+      }
     }
     cont++;
   }

@@ -24,11 +24,11 @@ int main() {
   createTable(bd, "Trabajan");
   addCol(bd, "Trabajan", "CI");
   addCol(bd, "Trabajan", "Nombre");
-  insertInto(bd, "Trabajan", "666:toto");
-  insertInto(bd, "Trabajan", "662:pepe");
   addCol(bd, "Personas", "CI");
   addCol(bd, "Personas", "Nombre");
+  insertInto(bd, "Trabajan", "666:toto");
   insertInto(bd, "Personas", "666:toto");
+  insertInto(bd, "Trabajan", "662:pepe");
   insertInto(bd, "Personas", "662:pepe");
   selectWhere(bd, "Personas2", "CI>664", "Personas");
   select(bd, "Putos", "Nombre:CI", "Personas");
