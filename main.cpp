@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////
 //                                           //
-//          Obligatorio EDA Parte 1          //
+//          Obligatorio EDA                  //
 //          Integrantes: Braian Romero       //
 //                       Mateo Sayas         //
 //                       Mathias Zunino      //
@@ -20,21 +20,6 @@ using namespace std;
 
 int main() {
   Base bd = crearBase();
-  createTable(bd, "Personas");
-  createTable(bd, "Trabajan");
-  addCol(bd, "Trabajan", "CI");
-  addCol(bd, "Trabajan", "Nombre");
-  addCol(bd, "Personas", "CI");
-  addCol(bd, "Personas", "Nombre");
-  insertInto(bd, "Trabajan", "666:toto");
-  insertInto(bd, "Personas", "666:toto");
-  insertInto(bd, "Trabajan", "662:pepe");
-  insertInto(bd, "Personas", "662:pepe");
-  selectWhere(bd, "Personas2", "CI>664", "Personas");
-  select(bd, "Putos", "Nombre:CI", "Personas");
-  join(bd, "Personas", "Trabajan", "Trabajadores");
-
-
   char *comando = new (char[MAX_COMANDO]);
   char *pch, *pch1, *pch2, *pch3;
   TipoRet ret;
